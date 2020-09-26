@@ -12,6 +12,7 @@
   "dependencies": {
     "lighthouse": "^6.3.0",
     "next": "9.5.3",
+    "pg": "^8.3.3",
     "puppeteer": "^5.3.1",
     "react": "16.13.1",
     "react-dom": "16.13.1"

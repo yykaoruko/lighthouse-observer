@@ -2,6 +2,10 @@
 
 var _modules = require("./modules");
 
+const {
+  Client
+} = require('pg');
+
 const lhObserverConfig = require('../../lh-observer.config');
 
 const main = async targetUrls => {
@@ -14,7 +18,15 @@ const main = async targetUrls => {
     return (0, _modules.formatLighthouseResult)(lhr);
   });
   const lighthouseResults = await Promise.all(lighthousePromises).then(results => results);
-  console.log(lighthouseResults);
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  });
+  lighthouseResults.forEach(result => {
+    (0, _modules.storeLighthouseResult)(client, result);
+  });
 };
 
 main(lhObserverConfig.targetUrls);

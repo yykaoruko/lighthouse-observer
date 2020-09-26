@@ -27,3 +27,15 @@ Object.keys(_browser).forEach(function (key) {
     }
   });
 });
+
+var _connection = require("./connection");
+
+Object.keys(_connection).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function () {
+      return _connection[key];
+    }
+  });
+});
