@@ -5,11 +5,34 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "transpile": "babel ./scripts --out-dir dist-scripts",
+    "lighthouse": "node ./dist-scripts/lighthouse"
   },
   "dependencies": {
+    "lighthouse": "^6.3.0",
     "next": "9.5.3",
+    "puppeteer": "^5.3.1",
     "react": "16.13.1",
     "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.5",
+    "dayjs": "^1.8.36"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
   }
 }
