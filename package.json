@@ -10,6 +10,7 @@
     "lighthouse": "node ./dist-scripts/lighthouse"
   },
   "dependencies": {
+    "dayjs": "^1.8.36",
     "lighthouse": "^6.3.0",
     "next": "9.5.3",
     "pg": "^8.3.3",
@@ -21,8 +22,7 @@
     "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.6",
     "@babel/node": "^7.10.5",
-    "@babel/preset-env": "^7.11.5",
-    "dayjs": "^1.8.36"
+    "@babel/preset-env": "^7.11.5"
   },
   "engines": {
     "node": "12.x"
