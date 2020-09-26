@@ -26,7 +26,6 @@ export const formatLighthouseResult = (lighthouseResults) => {
     'bootup-time',
     'network-server-latency',
   ];
-
   const scoreKeys = [
     'performance',
     'accessibility',
@@ -41,10 +40,12 @@ export const formatLighthouseResult = (lighthouseResults) => {
   };
 
   for (let key of auditKeys) {
-    result[key] = lighthouseResults.audits[key].numericValue || null;
+    const columnName = key.replace(/-/gi, '_');
+    result[columnName] = lighthouseResults.audits[key].numericValue || null;
   }
   for (let key of scoreKeys) {
-    result[`${key}-score`] = lighthouseResults.categories[key].score || null;
+    const columnName = key.replace(/-/gi, '_');
+    result[columnName] = lighthouseResults.categories[key].score || null;
   }
 
   return result;
