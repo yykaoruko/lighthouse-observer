@@ -1,7 +1,8 @@
+const pgp = require('pg-promise');
 export const storeLighthouseResult = (client, lighthouseResult) => {
-  const insertQuery = 'INSERT INTO lighthouse SET ?';
+  const insertQuery = pgp.helpers.insert(lighthouseResult, null, 'lighthouse');
   client.connect();
-  client.query(insertQuery, [lighthouseResult], (err, res) => {
+  client.query(insertQuery, (err, res) => {
     if (err) throw err;
     for (let row of res.rows) {
       console.log(JSON.stringify(row));
