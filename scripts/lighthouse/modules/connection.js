@@ -9,7 +9,7 @@ export const storeLighthouseResult = (client, lighthouseResult) => {
     }
     valuesString += `${value}`;
   })
-  const insertQuery = `INSERT INTO products (${keysString}) VALUES (${valuesString});`;
+  const insertQuery = `INSERT INTO lighthouse (${keysString}) VALUES (${valuesString});`;
   console.log(insertQuery);
   client.connect();
   client.query(insertQuery, (err, res) => {
