@@ -35,8 +35,8 @@ export const formatLighthouseResult = (lighthouseResults) => {
   ];
 
   const result = {
-    'fetch-time': dayjs(lighthouseResults.fetchTime).valueOf(), // unixtime (ms)
-    'requested-url': lighthouseResults.requestedUrl,
+    'fetch_time': dayjs(lighthouseResults.fetchTime).valueOf(), // unixtime (ms)
+    'requested_url': lighthouseResults.requestedUrl,
   };
 
   for (let key of auditKeys) {

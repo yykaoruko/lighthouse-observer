@@ -23,9 +23,9 @@ const formatLighthouseResult = lighthouseResults => {
   const auditKeys = ['first-contentful-paint', 'speed-index', 'largest-contentful-paint', 'interactive', 'total-blocking-time', 'cumulative-layout-shift', 'first-cpu-idle', 'max-potential-fid', 'first-meaningful-paint', 'estimated-input-latency', 'server-response-time', 'mainthread-work-breakdown', 'bootup-time', 'network-server-latency'];
   const scoreKeys = ['performance', 'accessibility', 'best-practices', 'seo', 'pwa'];
   const result = {
-    'fetch-time': dayjs(lighthouseResults.fetchTime).valueOf(),
+    'fetch_time': dayjs(lighthouseResults.fetchTime).valueOf(),
     // unixtime (ms)
-    'requested-url': lighthouseResults.requestedUrl
+    'requested_url': lighthouseResults.requestedUrl
   };
 
   for (let key of auditKeys) {
