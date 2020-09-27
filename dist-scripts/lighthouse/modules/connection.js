@@ -5,23 +5,20 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.storeLighthouseResult = void 0;
 
+var _constants = require("./constants");
+
 const storeLighthouseResult = (client, lighthouseResult) => {
-  const keysString = Object.keys(lighthouseResult).join(',');
+  const keysString = _constants.lighthouseDBColumnNames.join(',');
+
   let valuesString = '';
-  Object.values(lighthouseResult).forEach(value => {
-    if (valuesString.length > 0) valuesString += `,`;
-
-    if (typeof value === 'string') {
-      valuesString += `"${value}"`;
-      return;
-    }
-
-    valuesString += `${value}`;
+  lighthouseResult.forEach((result, index) => {
+    if (index !== 0) valuesString += ',';
+    valuesString += `$${index + 1}`;
   });
-  const insertQuery = `INSERT INTO lighthouse (${keysString}) VALUES (${valuesString});`;
-  console.log(insertQuery);
+  const query = `INSERT INTO lighthouse (${keysString}) VALUES (${valuesString});`;
+  console.log(query);
   client.connect();
-  client.query(insertQuery, (err, res) => {
+  client.query(query, lighthouseResult, (err, res) => {
     if (err) throw err;
 
     for (let row of res.rows) {

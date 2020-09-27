@@ -1,18 +1,15 @@
+import { lighthouseDBColumnNames } from './constants';
 export const storeLighthouseResult = (client, lighthouseResult) => {
-  const keysString = Object.keys(lighthouseResult).join(',');
+  const keysString = lighthouseDBColumnNames.join(',');
   let valuesString = '';
-  Object.values(lighthouseResult).forEach(value => {
-    if (valuesString.length > 0) valuesString += `,`;
-    if (typeof value === 'string') {
-      valuesString += `"${value}"`
-      return;
-    }
-    valuesString += `${value}`;
-  })
-  const insertQuery = `INSERT INTO lighthouse (${keysString}) VALUES (${valuesString});`;
-  console.log(insertQuery);
+  lighthouseResult.forEach((result, index) => {
+    if (index !== 0) valuesString += ',';
+    valuesString += `$${index + 1}`;
+  });
+  const query = `INSERT INTO lighthouse (${keysString}) VALUES (${valuesString});`;
+  console.log(query);
   client.connect();
-  client.query(insertQuery, (err, res) => {
+  client.query(query, lighthouseResult, (err, res) => {
     if (err) throw err;
     for (let row of res.rows) {
       console.log(JSON.stringify(row));
