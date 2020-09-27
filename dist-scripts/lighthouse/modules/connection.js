@@ -5,10 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.storeLighthouseResult = void 0;
 
-const pgp = require('pg-promise');
-
 const storeLighthouseResult = (client, lighthouseResult) => {
-  const insertQuery = pgp.helpers.insert(lighthouseResult, null, 'lighthouse');
+  const keysString = Object.keys(lighthouseResult).join(',');
+  const valuesString = Object.values(lighthouseResult).join(',');
+  const insertQuery = `INSERT INTO products (${keysString}) VALUES (${valuesString});`;
   client.connect();
   client.query(insertQuery, (err, res) => {
     if (err) throw err;
