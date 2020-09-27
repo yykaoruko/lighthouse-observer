@@ -7,7 +7,17 @@ exports.storeLighthouseResult = void 0;
 
 const storeLighthouseResult = (client, lighthouseResult) => {
   const keysString = Object.keys(lighthouseResult).join(',');
-  const valuesString = Object.values(lighthouseResult).join(',');
+  let valuesString = '';
+  Object.values(lighthouseResult).forEach(value => {
+    if (valuesString.length > 0) valuesString += `,`;
+
+    if (typeof value === 'string') {
+      valuesString += `"${value}"`;
+      return;
+    }
+
+    valuesString += `${value}`;
+  });
   const insertQuery = `INSERT INTO products (${keysString}) VALUES (${valuesString});`;
   console.log(insertQuery);
   client.connect();
