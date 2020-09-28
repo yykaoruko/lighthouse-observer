@@ -8,7 +8,10 @@
     "start": "next start -p $PORT",
     "transpile": "babel ./scripts --out-dir dist-scripts",
     "lighthouse": "node ./dist-scripts/lighthouse",
-    "prestart": "node ./dist-scripts/createTable"
+    "prestart": "node ./dist-scripts/createTable",
+    "fix": "run-s fix:eslint fix:prettier",
+    "fix:eslint": "eslint --fix ./scripts",
+    "fix:prettier": "prettier --write ./scripts"
   },
   "dependencies": {
     "dayjs": "^1.8.36",
@@ -24,7 +27,11 @@
     "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.6",
     "@babel/node": "^7.10.5",
-    "@babel/preset-env": "^7.11.5"
+    "@babel/preset-env": "^7.11.5",
+    "eslint": "^7.10.0",
+    "eslint-config-prettier": "^6.12.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.1.2"
   },
   "engines": {
     "node": "12.x"

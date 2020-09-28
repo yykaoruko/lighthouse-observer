@@ -5,11 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.launchBrowser = void 0;
 
-const puppeteer = require('puppeteer');
+const puppeteer = require("puppeteer");
 
 const launchBrowser = async () => {
   const option = {
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: ["--no-sandbox", "--disable-setuid-sandbox"]
   };
   return await puppeteer.launch(option);
 };

@@ -1,12 +1,12 @@
-import { createLigthouseTable } from './modules/connection'
-const { Client } = require('pg');
+import { createLigthouseTable } from "./modules/connection";
+const { Client } = require("pg");
 
-const main = async (targetUrls) => {
+const main = async () => {
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: {
-      rejectUnauthorized: false
-    }
+      rejectUnauthorized: false,
+    },
   });
   createLigthouseTable(client);
 };

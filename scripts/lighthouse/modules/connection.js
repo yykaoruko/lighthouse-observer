@@ -1,9 +1,9 @@
-import { lighthouseDBColumnNames } from './constants';
+import { lighthouseDBColumnNames } from "./constants";
 export const storeLighthouseResult = (client, lighthouseResult) => {
-  const keysString = lighthouseDBColumnNames.join(',');
-  let valuesString = '';
+  const keysString = lighthouseDBColumnNames.join(",");
+  let valuesString = "";
   lighthouseResult.forEach((result, index) => {
-    if (index !== 0) valuesString += ',';
+    if (index !== 0) valuesString += ",";
     valuesString += `$${index + 1}`;
   });
   const query = `INSERT INTO lighthouse (${keysString}) VALUES (${valuesString});`;
@@ -16,7 +16,7 @@ export const storeLighthouseResult = (client, lighthouseResult) => {
     }
     client.end();
   });
-}
+};
 
 export const createLigthouseTable = (client) => {
   const query = `CREATE TABLE IF NOT EXISTS lighthouse (
@@ -44,7 +44,7 @@ export const createLigthouseTable = (client) => {
   requested_url varchar(255),
   created_at timestamp default current_timestamp,
   PRIMARY KEY (id)
-);`
+);`;
   client.connect();
   client.query(query, (err, res) => {
     if (err) throw err;
@@ -53,4 +53,4 @@ export const createLigthouseTable = (client) => {
     }
     client.end();
   });
-}
+};

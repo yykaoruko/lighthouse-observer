@@ -1,5 +1,3 @@
 module.exports = {
-  targetUrls: [
-    'http://abehiroshi.la.coocan.jp/'
-  ],
-}
+  targetUrls: ["http://abehiroshi.la.coocan.jp/"],
+};

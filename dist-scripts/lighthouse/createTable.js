@@ -4,9 +4,9 @@ var _connection = require("./modules/connection");
 
 const {
   Client
-} = require('pg');
+} = require("pg");
 
-const main = async targetUrls => {
+const main = async () => {
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: {

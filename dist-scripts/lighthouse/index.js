@@ -4,9 +4,9 @@ var _modules = require("./modules");
 
 const {
   Client
-} = require('pg');
+} = require("pg");
 
-const lhObserverConfig = require('../../lh-observer.config');
+const lhObserverConfig = require("../../lh-observer.config");
 
 const main = async targetUrls => {
   const lighthousePromises = targetUrls.map(async url => {
