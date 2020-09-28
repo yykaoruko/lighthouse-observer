@@ -1,9 +1,6 @@
-import {
-  launchBrowser,
-  runLighthouse,
-  formatLighthouseResult,
-  storeLighthouseResult,
-} from "./modules";
+import { launchBrowser } from './modules/browser'
+import { runLighthouse, formatLighthouseResult } from './modules/lighthouse'
+import { storeLighthouseResult } from "./modules/connection";
 const { Client } = require("pg");
 const lhObserverConfig = require("../../lh-observer.config");
 

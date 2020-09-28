@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start -p $PORT",
     "transpile": "babel ./scripts --out-dir dist-scripts",
-    "lighthouse": "node ./dist-scripts/lighthouse",
-    "prestart": "node ./dist-scripts/createTable",
+    "lighthouse": "node ./dist-scripts/lighthouse/runLighthouse",
+    "prestart": "node ./dist-scripts/lighthouse/createTable",
     "fix": "run-s fix:eslint fix:prettier",
     "fix:eslint": "eslint --fix ./scripts",
     "fix:prettier": "prettier --write ./scripts"
