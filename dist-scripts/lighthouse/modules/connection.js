@@ -11,20 +11,24 @@ const storeLighthouseResult = (client, lighthouseResults) => {
   const keysString = _constants.lighthouseDBColumnNames.join(",");
 
   let valuesString = "";
-  lighthouseResults[0].forEach((result, index) => {
+
+  _constants.lighthouseDBColumnNames.forEach((name, index) => {
     if (index !== 0) valuesString += ",";
     valuesString += `$${index + 1}`;
   });
+
   const query = `INSERT INTO lighthouse (${keysString}) VALUES (${valuesString});`;
   console.log(query);
   client.connect();
-  client.query(query, lighthouseResults, (err, res) => {
-    if (err) throw err;
-
-    for (let row of res.rows) {
-      console.log(JSON.stringify(row));
-    }
-
+  const promises = lighthouseResults.map(result => {
+    return client.query(query, result, (err, res) => {
+      if (err) throw err;
+      console.log(res.rows[0]);
+    });
+  });
+  Promise.all(promises).catch(err => {
+    console.log(err);
+  }).finally(() => {
     client.end();
   });
 };

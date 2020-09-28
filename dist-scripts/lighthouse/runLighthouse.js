@@ -24,7 +24,6 @@ const main = async targetUrls => {
     lighthouseResults.push(result);
   }
 
-  ;
   if (browser) await browser.close();
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
