@@ -13,15 +13,19 @@ const {
 const lhObserverConfig = require("../../lh-observer.config");
 
 const main = async targetUrls => {
-  const lighthousePromises = targetUrls.map(async url => {
-    const browser = await (0, _browser.launchBrowser)();
+  const lighthouseResults = [];
+  const browser = await (0, _browser.launchBrowser)();
+
+  for (let url of targetUrls) {
     const {
       lhr
     } = await (0, _lighthouse.runLighthouse)(browser, url);
-    if (browser) await browser.close();
-    return (0, _lighthouse.formatLighthouseResult)(lhr);
-  });
-  const lighthouseResults = await Promise.all(lighthousePromises).then(results => results);
+    const result = (0, _lighthouse.formatLighthouseResult)(lhr);
+    lighthouseResults.push(result);
+  }
+
+  ;
+  if (browser) await browser.close();
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: {

@@ -5,16 +5,14 @@ const { Client } = require("pg");
 const lhObserverConfig = require("../../lh-observer.config");
 
 const main = async (targetUrls) => {
-  const lighthousePromises = targetUrls.map(async (url) => {
-    const browser = await launchBrowser();
+  const lighthouseResults = [];
+  const browser = await launchBrowser();
+  for (let url of targetUrls) {
     const { lhr } = await runLighthouse(browser, url);
-    if (browser) await browser.close();
-    return formatLighthouseResult(lhr);
-  });
-
-  const lighthouseResults = await Promise.all(lighthousePromises).then(
-    (results) => results
-  );
+    const result = formatLighthouseResult(lhr);
+    lighthouseResults.push(result);
+  };
+  if (browser) await browser.close();
 
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
