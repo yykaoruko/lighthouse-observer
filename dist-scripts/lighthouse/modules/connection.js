@@ -20,16 +20,20 @@ const storeLighthouseResult = (client, lighthouseResults) => {
   const query = `INSERT INTO lighthouse (${keysString}) VALUES (${valuesString});`;
   console.log(query);
   client.connect();
-  const promises = lighthouseResults.map(async result => {
-    return await client.query(query, result, (err, res) => {
-      if (err) throw err;
-      console.log(res.rows[0]);
+  const promises = lighthouseResults.map(result => {
+    return new Promise((resolve, reject) => {
+      client.query(query, result, (err, res) => {
+        if (err) reject(err);
+        console.log(res.rows[0]);
+        resolve(res);
+      });
     });
   });
-  Promise.all(promises).catch(err => {
-    console.log(err);
-  }).finally(() => {
+  Promise.all(promises).then(() => {
     client.end();
+  }).catch(err => {
+    client.end();
+    console.log(err);
   });
 };
 

@@ -1,4 +1,5 @@
 import { lighthouseDBColumnNames } from "./constants";
+
 export const storeLighthouseResult = (client, lighthouseResults) => {
   const keysString = lighthouseDBColumnNames.join(",");
   let valuesString = "";
@@ -6,21 +7,29 @@ export const storeLighthouseResult = (client, lighthouseResults) => {
     if (index !== 0) valuesString += ",";
     valuesString += `$${index + 1}`;
   });
+
   const query = `INSERT INTO lighthouse (${keysString}) VALUES (${valuesString});`;
   console.log(query);
+
   client.connect();
-  const promises = lighthouseResults.map(async (result) => {
-    return await client.query(query, result, (err, res) => {
-      if (err) throw err;
-      console.log(res.rows[0]);
-    });
-  });
-  Promise.all(promises)
-    .catch((err) => {
-      console.log(err);
+
+  const promises = lighthouseResults.map((result) => {
+    return new Promise((resolve, reject) => {
+      client.query(query, result, (err, res) => {
+        if (err) reject(err);
+        console.log(res.rows[0]);
+        resolve(res);
+      });
     })
-    .finally(() => {
+  });
+
+  Promise.all(promises)
+    .then(() => {
       client.end();
+    })
+    .catch((err) => {
+      client.end();
+      console.log(err);
     })
 };
 
