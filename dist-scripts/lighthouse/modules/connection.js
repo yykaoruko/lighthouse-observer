@@ -7,18 +7,18 @@ exports.createLigthouseTable = exports.storeLighthouseResult = void 0;
 
 var _constants = require("./constants");
 
-const storeLighthouseResult = (client, lighthouseResult) => {
+const storeLighthouseResult = (client, lighthouseResults) => {
   const keysString = _constants.lighthouseDBColumnNames.join(",");
 
   let valuesString = "";
-  lighthouseResult.forEach((result, index) => {
+  lighthouseResults[0].forEach((result, index) => {
     if (index !== 0) valuesString += ",";
     valuesString += `$${index + 1}`;
   });
   const query = `INSERT INTO lighthouse (${keysString}) VALUES (${valuesString});`;
   console.log(query);
   client.connect();
-  client.query(query, lighthouseResult, (err, res) => {
+  client.query(query, lighthouseResults, (err, res) => {
     if (err) throw err;
 
     for (let row of res.rows) {

@@ -20,10 +20,7 @@ const main = async (targetUrls) => {
       rejectUnauthorized: false,
     },
   });
-
-  lighthouseResults.forEach((result) => {
-    storeLighthouseResult(client, result);
-  });
+  storeLighthouseResult(client, lighthouseResults);
 };
 
 main(lhObserverConfig.targetUrls);

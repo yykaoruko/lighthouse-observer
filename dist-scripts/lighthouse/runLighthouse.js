@@ -32,9 +32,7 @@ const main = async targetUrls => {
       rejectUnauthorized: false
     }
   });
-  lighthouseResults.forEach(result => {
-    (0, _connection.storeLighthouseResult)(client, result);
-  });
+  (0, _connection.storeLighthouseResult)(client, lighthouseResults);
 };
 
 main(lhObserverConfig.targetUrls);
