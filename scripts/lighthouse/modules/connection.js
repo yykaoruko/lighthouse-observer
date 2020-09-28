@@ -9,8 +9,8 @@ export const storeLighthouseResult = (client, lighthouseResults) => {
   const query = `INSERT INTO lighthouse (${keysString}) VALUES (${valuesString});`;
   console.log(query);
   client.connect();
-  const promises = lighthouseResults.map((result) => {
-    return client.query(query, result, (err, res) => {
+  const promises = lighthouseResults.map(async (result) => {
+    return await client.query(query, result, (err, res) => {
       if (err) throw err;
       console.log(res.rows[0]);
     });
