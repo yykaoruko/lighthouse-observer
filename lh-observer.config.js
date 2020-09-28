@@ -1,3 +1,6 @@
 module.exports = {
-  targetUrls: ["http://abehiroshi.la.coocan.jp/"],
+  targetUrls: [
+    "https://rukolog.netlify.app/",
+    "https://rukolog.netlify.app/posts/npm-install-or-ci"
+  ],
 };
