@@ -14,7 +14,7 @@
     "dayjs": "^1.8.36",
     "googleapis": "^60.0.1",
     "lighthouse": "^6.3.0",
-    "puppeteer": "^5.3.1"
+    "puppeteer": "^2.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",
