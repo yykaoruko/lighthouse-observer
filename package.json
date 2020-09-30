@@ -2,6 +2,7 @@
   "name": "lighthouse-observer",
   "version": "0.1.0",
   "private": true,
+  "main": "src/index.js",
   "scripts": {
     "transpile": "babel ./scripts --out-dir dist",
     "lighthouse": "node ./dist/lighthouse/runLighthouse",
@@ -23,8 +24,5 @@
     "eslint-config-prettier": "^6.12.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.1.2"
-  },
-  "engines": {
-    "node": "12.x"
   }
 }
