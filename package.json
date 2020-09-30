@@ -3,12 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start -p $PORT",
-    "transpile": "babel ./scripts --out-dir dist-scripts",
-    "lighthouse": "node ./dist-scripts/lighthouse/runLighthouse",
-    "prestart": "node ./dist-scripts/lighthouse/createTable",
+    "transpile": "babel ./scripts --out-dir dist",
+    "lighthouse": "node ./dist/lighthouse/runLighthouse",
     "fix": "run-s fix:eslint fix:prettier",
     "fix:eslint": "eslint --fix ./scripts",
     "fix:prettier": "prettier --write ./scripts"
@@ -16,12 +12,7 @@
   "dependencies": {
     "dayjs": "^1.8.36",
     "lighthouse": "^6.3.0",
-    "next": "9.5.3",
-    "pg": "^8.3.3",
-    "pg-promise": "^10.6.1",
-    "puppeteer": "^5.3.1",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "puppeteer": "^5.3.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",
