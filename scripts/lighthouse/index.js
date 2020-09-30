@@ -1,7 +1,7 @@
 import { appendSpreadSheet } from './modules/spreadsheet';
 
-const main = () => {
-  appendSpreadSheet('test', [1, 2, 3]);
+const main = async () => {
+  await appendSpreadSheet('test', [[1, 2, 3]]);
 }
 
-main();
+exports.runLighthouseObserver = main;
