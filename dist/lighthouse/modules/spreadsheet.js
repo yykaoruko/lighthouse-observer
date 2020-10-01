@@ -3,17 +3,23 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.appendSpreadSheet = void 0;
+exports.appendSpreadSheet = exports.getGoogleClientAuth = void 0;
 
 const {
   google
 } = require('googleapis');
 
-const appendSpreadSheet = async (sheetName, values) => {
-  const auth = await google.auth.getClient({
+const getGoogleClientAuth = () => {
+  return google.auth.getClient({
     scopes: ['https://www.googleapis.com/auth/spreadsheets']
   });
+};
+
+exports.getGoogleClientAuth = getGoogleClientAuth;
+
+const appendSpreadSheet = async (auth, sheetName, values) => {
   const sheets = google.sheets('v4');
+  console.log('[result]', values);
   return sheets.spreadsheets.values.append({
     auth,
     spreadsheetId: process.env.SPREADSHEET_ID,
@@ -21,6 +27,7 @@ const appendSpreadSheet = async (sheetName, values) => {
     valueInputOption: "USER_ENTERED",
     insertDataOption: "INSERT_ROWS",
     resource: {
+      majorDimension: "ROWS",
       values: values
     }
   });

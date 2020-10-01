@@ -1,14 +1,16 @@
 import { launchBrowser } from "./modules/browser";
 import { runLighthouse, formatLighthouseResult } from "./modules/lighthouse";
-import { appendSpreadSheet } from './modules/spreadsheet';
-const lhObserverConfig = require("../../lh-observer.config");
+import { appendSpreadSheet, getGoogleClientAuth } from './modules/spreadsheet';
+const config = require("../../lh-observer.config");
 
 const main = async () => {
   const browser = await launchBrowser();
-  for (let url of lhObserverConfig.targetUrls) {
-    const { lhr } = await runLighthouse(browser, url);
+  const auth = await getGoogleClientAuth();
+  for (let target of config.targets) {
+    console.log('[start]', target.url)
+    const { lhr } = await runLighthouse(browser, target.url);
     const result = formatLighthouseResult(lhr);
-    await appendSpreadSheet(url, [result])
+    await appendSpreadSheet(auth, target.sheetName, [result]);
   }
   if (browser) await browser.close();
 }

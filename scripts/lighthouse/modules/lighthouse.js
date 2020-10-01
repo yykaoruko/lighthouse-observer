@@ -1,6 +1,6 @@
 import { lighthouseDBColumnNames } from "./constants";
+import { formatDatetime } from "./date";
 const lighthouse = require("lighthouse");
-const dayjs = require("dayjs");
 
 export const runLighthouse = async (browser, url) => {
   return await lighthouse(url, {
@@ -15,7 +15,7 @@ export const formatLighthouseResult = (lighthouseResults) => {
     const key = columnName.replace(/_/gi, "-");
     switch (columnName) {
       case "fetch_time":
-        return dayjs(lighthouseResults.fetchTime).valueOf(); // unixtime (ms)
+        return formatDatetime(lighthouseResults.fetchTime);
       case "requested_url":
         return lighthouseResults.requestedUrl;
       case "performance":

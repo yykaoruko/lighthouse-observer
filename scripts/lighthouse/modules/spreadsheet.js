@@ -1,10 +1,14 @@
 const { google } = require('googleapis');
 
-export const appendSpreadSheet = async (sheetName, values) => {
-  const auth = await google.auth.getClient({
+export const getGoogleClientAuth = () => {
+  return google.auth.getClient({
     scopes: ['https://www.googleapis.com/auth/spreadsheets']
   })
+}
+
+export const appendSpreadSheet = async (auth, sheetName, values) => {
   const sheets = google.sheets('v4');
+  console.log('[result]', values);
   return sheets.spreadsheets.values.append({
     auth,
     spreadsheetId: process.env.SPREADSHEET_ID,
@@ -12,6 +16,7 @@ export const appendSpreadSheet = async (sheetName, values) => {
     valueInputOption: "USER_ENTERED",
     insertDataOption: "INSERT_ROWS",
     resource: {
+      majorDimension: "ROWS",
       values: values
     }
   });

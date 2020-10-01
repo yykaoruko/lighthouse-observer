@@ -1,6 +1,12 @@
 module.exports = {
-  targetUrls: [
-    "https://rukolog.netlify.app/",
-    "https://rukolog.netlify.app/posts/npm-install-or-ci",
-  ],
+  targets: [
+    {
+      url: "https://rukolog.netlify.app/",
+      sheetName: "top",
+    },
+    {
+      url: "https://rukolog.netlify.app/",
+      sheetName: "post-detail",
+    },
+  ]
 };

@@ -7,9 +7,9 @@ exports.formatLighthouseResult = exports.runLighthouse = void 0;
 
 var _constants = require("./constants");
 
-const lighthouse = require("lighthouse");
+var _date = require("./date");
 
-const dayjs = require("dayjs");
+const lighthouse = require("lighthouse");
 
 const runLighthouse = async (browser, url) => {
   return await lighthouse(url, {
@@ -27,8 +27,7 @@ const formatLighthouseResult = lighthouseResults => {
 
     switch (columnName) {
       case "fetch_time":
-        return dayjs(lighthouseResults.fetchTime).valueOf();
-      // unixtime (ms)
+        return (0, _date.formatDatetime)(lighthouseResults.fetchTime);
 
       case "requested_url":
         return lighthouseResults.requestedUrl;
